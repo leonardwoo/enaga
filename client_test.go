@@ -1,20 +1,38 @@
 package enaga
 
-import "testing"
+import (
+  "fmt"
+  "testing"
+)
 
 func TestSender(t *testing.T) {
   mailMsg := &MailMsg{
-    From:    "test@matoro.net",
-    To:      []string{"leo@matoro.net"},
-    Subject: "Go mail test",
-    Body:    "gomail test with emersion go-smtp",
+    From:    "",
+    To:      []string{""},
+    Subject: "",
+    Body:    "",
   }
 
-  //Sender("smtp://smtp.ym.163.com:25", "test@matoro.net", "3wJzYcy827", mailMsg)
-  Sender("smtps://smtp.ym.163.com:994", "test@matoro.net", "3wJzYcy827", mailMsg)
+  //Sender("smtp://smtp.example.com:25", "", "", mailMsg)
+  flag, err := Sender("smtps://smtp.example.com:994", "", "", mailMsg)
+  if err != nil {
+    panic(err)
+  }
+  if flag {
+    fmt.Println("sender successful")
+  } else {
+    fmt.Println("sender failed")
+  }
 }
 
 func TestReceiver(t *testing.T) {
-  //Receiver("imap://imap.ym.163.com:143", "test@matoro.net", "3wJzYcy827", false, 20)
-  Receiver("imaps://imap.ym.163.com:993", "test@matoro.net", "3wJzYcy827", true, 20)
+  //Receiver("imap://imap.example.com:143", "", "", false, 20)
+  mails, err := Receiver("imaps://imap.example.com:993", "", "", true, 20)
+  if err != nil {
+    panic(err)
+  }
+
+  if mails != nil {
+    fmt.Println(toJsonString(mails))
+  }
 }

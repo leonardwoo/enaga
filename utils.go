@@ -128,8 +128,8 @@ func buildMailMsg(msg *MailMsg) string {
   return data
 }
 
-func readMailMsg(mr *mail.Reader) MailMsg {
-  var msg MailMsg
+func readMailMsg(mr *mail.Reader) *MailMsg {
+  var msg *MailMsg
 
   // Print some info about the message
   header := mr.Header

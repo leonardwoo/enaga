@@ -75,9 +75,8 @@ func SmtpListener(domain string, port int16, timeout int64) {
 
   fmt.Println("Starting server at", s.Addr)
   if err := s.ListenAndServe(); err != nil {
-    panic(err)
+    log.Fatal(err)
   }
-
 }
 
 func ImapListener(domain string, port int16) {
